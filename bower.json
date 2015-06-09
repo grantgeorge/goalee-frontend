@@ -1,7 +1,7 @@
 {
-  "name": "carrot-frontend",
+  "name": "goalee-frontend",
   "version": "0.0.2",
-  "dependencies": { 
+  "dependencies": {
     "normalize.css": "~3.0.2",
     "foundation": "~5.5.0",
     "modernizr": "^2.8.3"

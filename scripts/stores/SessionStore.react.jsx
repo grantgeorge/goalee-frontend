@@ -13,7 +13,7 @@ var _email = sessionStorage.getItem('email');
 var _errors = [];
 
 var SessionStore = assign({}, EventEmitter.prototype, {
-  
+
   emitChange: function() {
     this.emit(CHANGE_EVENT);
   },
@@ -27,7 +27,7 @@ var SessionStore = assign({}, EventEmitter.prototype, {
   },
 
   isLoggedIn: function() {
-    return _accessToken ? true : false;    
+    return _accessToken ? true : false;
   },
 
   getAccessToken: function() {
@@ -73,7 +73,7 @@ SessionStore.dispatchToken = SmallAppDispatcher.register(function(payload) {
 
     default:
   }
-  
+
   return true;
 });
 

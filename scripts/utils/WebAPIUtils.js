@@ -20,8 +20,8 @@ module.exports = {
 
   signup: function(email, username, password, passwordConfirmation) {
     request.post(APIEndpoints.REGISTRATION)
-      .send({ user: { 
-        email: email, 
+      .send({ user: {
+        email: email,
         username: username,
         password: password,
         password_confirmation: passwordConfirmation
@@ -94,6 +94,48 @@ module.exports = {
           } else {
             json = JSON.parse(res.text);
             ServerActionCreators.receiveCreatedStory(json, null);
+          }
+        }
+      });
+  },
+
+  loadGoals: function() {
+    request.get(APIEndpoints.GOALS)
+      .set('Accept', 'application/json')
+      .set('Authorization', sessionStorage.getItem('accessToken'))
+      .end(function(error, res){
+        if (res) {
+          json = JSON.parse(res.text);
+          ServerActionCreators.receiveGoals(json);
+        }
+      });
+  },
+
+  loadGoal: function(goalId) {
+    request.get(APIEndpoints.GOALS + '/' + goalId)
+      .set('Accept', 'application/json')
+      .set('Authorization', sessionStorage.getItem('accessToken'))
+      .end(function(error, res){
+        if (res) {
+          json = JSON.parse(res.text);
+          ServerActionCreators.receiveGoal(json);
+        }
+      });
+  },
+
+  createGoal: function(title, body) {
+    request.post(APIEndpoints.GOALS)
+      .set('Accept', 'application/json')
+      .set('Authorization', sessionStorage.getItem('accessToken'))
+      .send({ story: { title: title, body: body } })
+      .end(function(error, res){
+        if (res) {
+          if (res.error) {
+            var errorMsgs = _getErrors(res);
+            ServerActionCreators.receiveCreatedGoal(null, errorMsgs);
+          } else {
+            json = JSON.parse(res.text);
+            ServerActionCreators.receiveCreatedGoal(json, null);
           }
         }
       });

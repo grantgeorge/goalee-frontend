@@ -7,11 +7,11 @@ var WebAPIUtils = require('../utils/WebAPIUtils.js');
 var ActionTypes = SmallConstants.ActionTypes;
 var CHANGE_EVENT = 'change';
 
-var _stories = [];
+var _goals = [];
 var _errors = [];
-var _story = { title: "", body: "", user: { username: "" } };
+var _goal = { title: "", body: "", user: { username: "" } };
 
-var StoryStore = assign({}, EventEmitter.prototype, {
+var GoalStore = assign({}, EventEmitter.prototype, {
 
   emitChange: function() {
     this.emit(CHANGE_EVENT);
@@ -25,12 +25,12 @@ var StoryStore = assign({}, EventEmitter.prototype, {
     this.removeListener(CHANGE_EVENT, callback);
   },
 
-  getAllStories: function() {
-    return _stories;
+  getAllGoals: function() {
+    return _goals;
   },
 
-  getStory: function() {
-    return _story;
+  getGoal: function() {
+    return _goal;
   },
 
   getErrors: function() {
@@ -39,41 +39,41 @@ var StoryStore = assign({}, EventEmitter.prototype, {
 
 });
 
-StoryStore.dispatchToken = SmallAppDispatcher.register(function(payload) {
+GoalStore.dispatchToken = SmallAppDispatcher.register(function(payload) {
   var action = payload.action;
 
   switch(action.type) {
 
-    case ActionTypes.RECEIVE_STORIES:
-      _stories = action.json;
-      StoryStore.emitChange();
+    case ActionTypes.RECEIVE_GOALS:
+      _goals = action.json;
+      GoalStore.emitChange();
       break;
 
-    case ActionTypes.RECEIVE_CREATED_STORY:
+    case ActionTypes.RECEIVE_CREATED_GOAL:
       if (action.json) {
-        _stories.unshift(action.json);
+        _goals.unshift(action.json);
         _errors = [];
       }
       if (action.errors) {
         _errors = action.errors;
       }
-      StoryStore.emitChange();
+      GoalStore.emitChange();
       break;
 
-    case ActionTypes.RECEIVE_STORY:
+    case ActionTypes.RECEIVE_GOAL:
       if (action.json) {
-        _story = action.json;
+        _goal = action.json;
         _errors = [];
       }
       if (action.errors) {
         _errors = action.errors;
       }
-      StoryStore.emitChange();
+      GoalStore.emitChange();
       break;
   }
 
   return true;
 });
 
-module.exports = StoryStore;
+module.exports = GoalStore;
 

@@ -22,7 +22,7 @@ var Header = React.createClass({
           <ul className="dropdown">
             <li><a href='#' onClick={this.logout}>Logout</a></li>
           </ul>
-        </li> 
+        </li>
       </ul>
     ) : (
       <ul className="right">
@@ -33,7 +33,10 @@ var Header = React.createClass({
 
     var leftNav = this.props.isLoggedIn ? (
       <ul className="left">
+        <li><Link to="stories">Stories</Link></li>
+        <li><Link to="goals">Goals</Link></li>
         <li><Link to="new-story">New story</Link></li>
+        <li><Link to="new-goal">New goal</Link></li>
       </ul>
     ) : (
       <div></div>
