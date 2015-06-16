@@ -139,6 +139,27 @@ module.exports = {
           }
         }
       });
+  },
+
+  createCompletion: function(goalId, completed) {
+    request.post(APIEndpoints.COMPLETIONS)
+      .set('Accept', 'application/json')
+      .set('Authorization', sessionStorage.getItem('accessToken'))
+      .send({ completion: { goal_id: goalId, completed: completed } })
+      .end(function(error, res){
+        if (res) {
+          if (res.error) {
+            var errorMsgs = _getErrors(res);
+            ServerActionCreators.receiveCreatedCompletion(null, errorMsgs);
+          } else {
+
+            console.log('createCompletion WebAPIUtils');
+
+            json = JSON.parse(res.text);
+            ServerActionCreators.receiveCreatedCompletion(json, null);
+          }
+        }
+      });
   }
 
 };

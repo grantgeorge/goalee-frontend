@@ -8,7 +8,8 @@ module.exports = {
     LOGIN:          APIRoot + "/v1/login",
     REGISTRATION:   APIRoot + "/v1/users",
     STORIES:        APIRoot + "/v1/stories",
-    GOALS:          APIRoot + "/v1/goals"
+    GOALS:          APIRoot + "/v1/goals",
+    COMPLETIONS:          APIRoot + "/v1/completions"
   },
 
   PayloadSources: keyMirror({
@@ -37,7 +38,12 @@ module.exports = {
     LOAD_GOAL: null,
     RECEIVE_GOAL: null,
     CREATE_GOAL: null,
-    RECEIVE_CREATED_GOAL: null
+    RECEIVE_CREATED_GOAL: null,
+
+    // Completions
+    RECEIVE_COMPLETION: null,
+    CREATE_COMPLETION: null,
+    RECEIVE_CREATED_COMPLETION: null
   })
 
 };

@@ -46,6 +46,9 @@ GoalStore.dispatchToken = SmallAppDispatcher.register(function(payload) {
 
     case ActionTypes.RECEIVE_GOALS:
       _goals = action.json;
+
+      console.log(_goals);
+
       GoalStore.emitChange();
       break;
 

@@ -3,6 +3,7 @@ var WebAPIUtils = require('../../utils/WebAPIUtils.js');
 var GoalStore = require('../../stores/GoalStore.react.jsx');
 var ErrorNotice = require('../../components/common/ErrorNotice.react.jsx');
 var GoalActionCreators = require('../../actions/GoalActionCreators.react.jsx');
+var CompletionActionCreators = require('../../actions/CompletionActionCreators.react.jsx');
 var Router = require('react-router');
 var Link = Router.Link;
 var timeago = require('timeago');
@@ -46,15 +47,37 @@ var GoalsPage = React.createClass({
 });
 
 var GoalItem = React.createClass({
+
+  getInitialState: function() {
+    return { isChecked: this.props.goal.completions.length > 0 };
+  },
+
+  _onCompletion: function(e) {
+    this.setState({isChecked: !this.state.isChecked});
+    console.log('call to server to create a completion');
+    var goalId = this.props.goal.id;
+    var completed = true;
+    CompletionActionCreators.createCompletion(goalId, completed);
+  },
+
   render: function() {
     return (
       <li className="goal">
-        <div className="goal__title">
+        <div className="goal-title">
           <Link to="goal" params={ {goalId: this.props.goal.id} }>
             {this.props.goal.name}
           </Link>
+          <label>
+            <input
+              className="goal-completed-checkbox"
+              type="checkbox"
+              name="completed"
+              checked={this.state.isChecked}
+              onChange={this._onCompletion} />
+            {this.state.isChecked ? this.props.labelOn : this.props.labelOff}
+          </label>
         </div>
-        <div className="goal__body">{this.props.goal.description}</div>
+        <div className="goal-body">{this.props.goal.description}</div>
       </li>
       );
   }

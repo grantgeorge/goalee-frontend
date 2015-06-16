@@ -63,6 +63,17 @@ module.exports = {
       json: json,
       errors: errors
     });
+  },
+
+  receiveCreatedCompletion: function(json, errors) {
+
+    console.log('receiveCreatedCompletion in ServerActionCreator');
+
+    SmallAppDispatcher.handleServerAction({
+      type: ActionTypes.RECEIVE_CREATED_COMPLETION,
+      json: json,
+      errors: errors
+    });
   }
 
 };
