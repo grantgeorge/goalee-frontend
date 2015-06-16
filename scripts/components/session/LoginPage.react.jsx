@@ -8,7 +8,7 @@ var LoginPage = React.createClass({
   getInitialState: function() {
     return { errors: [] };
   },
- 
+
   componentDidMount: function() {
     SessionStore.addChangeListener(this._onChange);
   },
@@ -34,20 +34,23 @@ var LoginPage = React.createClass({
     return (
       <div>
         {errors}
-        <div className="row">
-          <div className="card card--login small-10 medium-6 large-4 columns small-centered">
-            <form onSubmit={this._onSubmit}>
-              <div className="card--login__field">
-                <label name="email">Email</label>
-                <input type="text" name="email" ref="email" /> 
-              </div>
-              <div className="card--login__field">
-                <label name="password">Password</label>
-                <input type="password" name="password" ref="password" />
-              </div>
-              <button type="submit" className="card--login__submit">Login</button>
-            </form>
-          </div>
+        <div className="form-group well login-page">
+          <form onSubmit={this._onSubmit}>
+            <div className="form-group">
+              <label name="email">Email</label>
+              <input type="text" className="form-control" name="email" ref="email" />
+            </div>
+            <div className="form-group">
+              <label name="password">Password</label>
+              <input type="password" className="form-control" name="password" ref="password" />
+            </div>
+            <div className="checkbox">
+              <label>
+                <input type="checkbox" name="remember-me" />Remember me
+              </label>
+            </div>
+            <button type="submit" className="btn btn-primary">Login</button>
+          </form>
         </div>
       </div>
     );

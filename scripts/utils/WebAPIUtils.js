@@ -123,11 +123,11 @@ module.exports = {
       });
   },
 
-  createGoal: function(title, body) {
+  createGoal: function(name, description) {
     request.post(APIEndpoints.GOALS)
       .set('Accept', 'application/json')
       .set('Authorization', sessionStorage.getItem('accessToken'))
-      .send({ story: { title: title, body: body } })
+      .send({ goal: { name: name, description: description } })
       .end(function(error, res){
         if (res) {
           if (res.error) {

@@ -16,26 +16,26 @@ var GoalNew = React.createClass({
 
   _onSubmit: function(e) {
     e.preventDefault();
-    var title = this.refs.title.getDOMNode().value;
-    var body = this.refs.body.getDOMNode().value;
-    GoalActionCreators.createGoal(title, body);
+    var name = this.refs.name.getDOMNode().value;
+    var description = this.refs.description.getDOMNode().value;
+    GoalActionCreators.createGoal(name, description);
   },
 
   render: function() {
     return (
-      <div className="row">
-        <form onSubmit={this._onSubmit} className="new-goal">
-          <div className="new-goal__title">
-            <input type="text" placeholder="Title" name="title" ref="title" />
-          </div>
-          <div className="new-goal__body">
-            <textarea rows="10" placeholder="Your goal..." name="body" ref="body" />
-          </div>
-          <div className="new-goal__submit">
-            <button type="submit">Create</button>
-          </div>
-         </form>
-       </div>
+      <form onSubmit={this._onSubmit} className="new-goal">
+        <div className="form-group">
+          <label htmlFor="newGoalNameInput">Name</label>
+          <input type="text" className="form-control"
+            placeholder="New goal name" name="name" ref="name" id="newGoalNameInput" />
+        </div>
+        <div className="form-group">
+          <label htmlFor="description">Name</label>
+          <input type="text" className="form-control"
+            placeholder="New goal description" name="description" ref="description" />
+        </div>
+        <button type="submit" className="btn btn-primary">Submit</button>
+       </form>
      );
   }
 

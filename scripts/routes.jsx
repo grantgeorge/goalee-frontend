@@ -16,16 +16,13 @@ var GoalNew = require('./components/goals/GoalNew.react.jsx');
 
 module.exports = (
   <Route name="app" path="/" handler={SmallApp}>
-    <DefaultRoute handler={StoriesPage} />
+    <DefaultRoute handler={GoalsPage} />
     <Route name="login" path="/login" handler={LoginPage}/>
     <Route name="signup" path="/signup" handler={SignupPage}/>
-    <Route name="stories" path="/stories" handler={StoriesPage}/>
-    <Route name="story" path="/stories/:storyId" handler={StoryPage}/>
-    <Route name="new-story" path="/story/new" handler={StoryNew}/>
 
     <Route name="goals" path="/goals" handler={GoalsPage}/>
     <Route name="goal" path="/goals/:goalId" handler={GoalPage}/>
-    <Route name="new-goal" path="/goals/new" handler={GoalNew}/>
+    <Route name="new-goal" path="/goal/new" handler={GoalNew}/>
   </Route>
 );
 
